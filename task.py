@@ -67,6 +67,7 @@ class Bank:
     def send_money_from_one_to_another(self, sender_id, reciever_id, amount_to_send):
         self.__clients_list[sender_id].withdraw_money(amount_to_send)
         self.__clients_list[reciever_id].deposit_money(amount_to_send)
+        print("Transaction completed")
         
 
 class BankFactory:
@@ -81,4 +82,4 @@ if __name__ == "__main__":
     bank.print_all_clients()
     bank.withdraw_money(1, 100)
 
-
+    bank.send_money_from_one_to_another(1,2,100)
