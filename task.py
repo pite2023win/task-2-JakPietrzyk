@@ -43,6 +43,10 @@ class ClientBankEntity(Client):
     def withdraw_money(self, amount_to_withdraw):
         self.__amount_of_money -= amount_to_withdraw
         print(f"Recieved: {amount_to_withdraw}")
+    
+    def deposit_money(self, amount_to_depsit):
+        self.__amount_of_money += amount_to_depsit
+        print(f"Recieved: {amount_to_depsit}")
         
 
 class Bank:
@@ -61,7 +65,8 @@ class Bank:
         self.__clients_list[client_id].withdraw_money(amount_to_withdraw)
 
     def send_money_from_one_to_another(self, sender_id, reciever_id, amount_to_send):
-        pass
+        self.__clients_list[sender_id].withdraw_money(amount_to_send)
+        self.__clients_list[reciever_id].deposit_money(amount_to_send)
         
 
 class BankFactory:
@@ -70,6 +75,10 @@ class BankFactory:
 if __name__ == "__main__":
     bank = Bank()
     client1 = Client(1, "New", "Client")
+    client2 = Client(2, "Second", "Client")
     bank.add_client(client1, 1000)
+    bank.add_client(client2, 2000)
     bank.print_all_clients()
     bank.withdraw_money(1, 100)
+
+
